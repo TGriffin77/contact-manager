@@ -1,0 +1,24 @@
+create database COP4331;
+use COP4331;
+
+CREATE TABLE `COP4331`.`Users` ( `ID` INT NOT NULL AUTO_INCREMENT , `FirstName`
+VARCHAR(50) NOT NULL DEFAULT '' , `LastName` VARCHAR(50) NOT NULL DEFAULT '' , `Login`
+VARCHAR(50) NOT NULL DEFAULT '' , `Password` VARCHAR(50) NOT NULL DEFAULT '' ,
+PRIMARY KEY (`ID`)) ENGINE = InnoDB;
+
+CREATE TABLE `COP4331`.`Contacts`
+(
+`ID` INT NOT NULL AUTO_INCREMENT ,
+`FirstName` VARCHAR(50) NOT NULL DEFAULT '' ,
+`LastName` VARCHAR(50) NOT NULL DEFAULT '' ,
+`Phone` VARCHAR(50) NOT NULL DEFAULT '' ,
+`Email` VARCHAR(50) NOT NULL DEFAULT '' ,
+`UserID` INT NOT NULL DEFAULT '0' ,
+PRIMARY KEY (`ID`)
+) ENGINE = InnoDB;
+
+insert into Users (FirstName,LastName,Login,Password) VALUES ('Hunter','Shapiro','Project','Group26');
+
+//create a new user for the entire database
+create user 'HunterS' identified by 'Group26COP4331'; 
+grant all privileges on COP4331.* to 'HunterS'@'%';
