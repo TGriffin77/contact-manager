@@ -1,11 +1,18 @@
+//creates the database
 create database COP4331;
+//uses database
 use COP4331;
+//drops already created tables if ones have been made before
+DROP TABLE IF EXISTS Contacts;
+DROP TABLE IF EXISTS Users;
 
+//creates the table Users in the COP4331 database with firstname, lastname, login, and password elements
 CREATE TABLE `COP4331`.`Users` ( `ID` INT NOT NULL AUTO_INCREMENT , `FirstName`
 VARCHAR(50) NOT NULL DEFAULT '' , `LastName` VARCHAR(50) NOT NULL DEFAULT '' , `Login`
 VARCHAR(50) NOT NULL DEFAULT '' , `Password` VARCHAR(50) NOT NULL DEFAULT '' ,
 PRIMARY KEY (`ID`)) ENGINE = InnoDB;
 
+//creates the table Contacts in the COP4331 database with ID, firstname, lastname, Phone, Email, and UserID elements
 CREATE TABLE `COP4331`.`Contacts`
 (
 `ID` INT NOT NULL AUTO_INCREMENT ,
@@ -16,9 +23,10 @@ CREATE TABLE `COP4331`.`Contacts`
 `UserID` INT NOT NULL DEFAULT '0' ,
 PRIMARY KEY (`ID`)
 ) ENGINE = InnoDB;
-
-insert into Users (FirstName,LastName,Login,Password) VALUES ('Hunter','Shapiro','Project','Group26');
+//This creates a User so that new queries for the data can be addded later
+insert into Users (FirstName,LastName,Login,Password) VALUES ('Harry','Potter','Project','Group26');
 
 //create a new user for the entire database
-create user 'HunterS' identified by 'Group26COP4331'; 
+create user 'Harry' identified by 'Group26COP4331'; 
+//grants all privileges to this specific user for the entire database
 grant all privileges on COP4331.* to 'HunterS'@'%';
