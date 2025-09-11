@@ -8,16 +8,19 @@ function App() {
 
   return (
     <>
-    <BrowserRouter>
-
     
+    <BrowserRouter>
+    <nav className="p-4">This is the navbar</nav>
+    <div className="max-w-screen-xl mx-auto p-4">
       <Routes>
         <Route path="/" element={<Home />}></Route>
         <Route path="/login" element={<Login />}></Route>
         <Route path="/dashboard" element={<Dashboard />}></Route>
         <Route path="/register" element={<Register />}></Route>
       </Routes>
+      </div>
     </BrowserRouter>
+    
     </>
   )
 }
