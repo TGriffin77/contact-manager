@@ -1,0 +1,159 @@
+body 
+{
+    background-color: #e0f2f1;
+}
+
+#title 
+{
+    font-size: 40px;
+    width: 100%;
+    margin: 2% 5%;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    color: #1b68a3;
+}
+
+#loginDiv, #loggedInDiv, #accessUIDiv 
+{
+    font-size: 30px;
+    width: 70%;
+    margin-left: 15%;
+    padding: 25px;
+    background-color: #bbdefb;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+#registerDiv 
+{
+    font-size: 30px;
+    width: 70%;
+    margin: 50px auto;
+    padding: 25px;
+    background-color: #bbdefb;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+#registerButton 
+{
+    font-size: 24px;
+    border-radius: 12px;
+    border: none;
+    background-color: #26a69a;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    width: auto;
+}
+
+#registerButton:hover 
+{
+    background-color: #00897b;
+}
+
+.buttons 
+{
+    font-size: 24px;
+    border-radius: 12px;
+    width: 50%;
+    margin-left: 25%;
+    font-family: 'Ubuntu', sans-serif;
+    border: none;
+    background-color: #26a69a;
+    color: white;
+    padding: 10px 0;
+    transition: background-color 0.3s ease;
+}
+
+.buttons:hover 
+{
+    background-color: #00897b;
+}
+
+input[type="text"], input[type="password"] 
+{
+    font-size: 18px;
+    border-radius: 12px;
+    border: 1px solid #b0bec5;
+    text-align: center;
+    width: 80%;
+    margin-left: 10%;
+    margin-bottom: 20px;
+    padding: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+#inner-title 
+{
+    display: block;
+    font-size: 1em;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 20px;
+    font-family: 'Ubuntu', sans-serif;
+    color: #3e2723;
+}
+
+#loginResult, #registerResult, #contactAddResult, #contactSearchResult 
+{
+    display: block;
+    font-size: 0.9em;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    color: #3a0505;
+}
+
+#userName 
+{
+    display: inline-block;
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    color: #01579b;
+    font-size: 20px;
+}
+
+#logoutButton 
+{
+    width: 20%;
+    margin-left: 40%;
+}
+
+select 
+{
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 2%;
+    font-size: 0.75em;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#contactSearchResult 
+{
+    display: block;
+    font-size: 0.9em;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    color: #3a0505;
+}
+
+#contactAddResult 
+{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    font-family: 'Ubuntu', sans-serif;
+    color: #95060a;
+}
