@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
-const urlBase = 'http://vasupradha.xyz/LAMPAPI';
+const urlBase = 'http://localhost/LAMPAPI';
 const extension = 'php';
 
 function Login() {
