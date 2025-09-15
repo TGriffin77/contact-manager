@@ -1,4 +1,7 @@
 <?php
+header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Headers: Content-Type");
+header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 
 	$inData = getRequestInfo();
 	
@@ -12,30 +15,29 @@
 	} 
 	else
 	{
-		$stmt = $conn->prepare("select Name from Contacts where Name like ? and UserID=?");
-		$contactName = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ss", $contactName, $inData["userId"]);
+		$stmt = $conn->prepare(
+    		"SELECT FirstName, LastName, Phone, Email 
+     		FROM Contacts 
+     		WHERE (FirstName LIKE ? OR LastName LIKE ? OR Phone LIKE ? OR Email LIKE ?) 
+     		AND UserID=?"
+		);
+
+		$search = "%" . $inData["search"] . "%";
+		$stmt->bind_param("ssssi", $search, $search, $search, $search, $inData["userId"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();
 		
-		while($row = $result->fetch_assoc())
-		{
-			if( $searchCount > 0 )
-			{
-				$searchResults .= ",";
-			}
-			$searchCount++;
-			$searchResults .= '"' . $row["Name"] . '"';
+		$searchResults = [];
+
+		while ($row = $result->fetch_assoc()) {
+    		$searchResults[] = $row; // stores FirstName, LastName, Phone, Email, UserID
 		}
-		
-		if( $searchCount == 0 )
-		{
-			returnWithError( "No Records Found" );
-		}
-		else
-		{
-			returnWithInfo( $searchResults );
+
+		if (count($searchResults) === 0) {
+			returnWithError("No Records Found");
+		} else {
+			returnWithInfo($searchResults);
 		}
 		
 		$stmt->close();
@@ -50,19 +52,20 @@
 	function sendResultInfoAsJson( $obj )
 	{
 		header('Content-type: application/json');
-		echo $obj;
+    	echo json_encode($obj, JSON_UNESCAPED_UNICODE);
 	}
 	
-	function returnWithError( $err )
-	{
-		$retValue = '{"id":0,"firstName":"","lastName":"","error":"' . $err . '"}';
-		sendResultInfoAsJson( $retValue );
+	function returnWithError($err) {
+		sendResultInfoAsJson([
+			"results" => [],
+			"error" => $err
+		]);
 	}
 	
-	function returnWithInfo( $searchResults )
-	{
-		$retValue = '{"results":[' . $searchResults . '],"error":""}';
-		sendResultInfoAsJson( $retValue );
+	function returnWithInfo($searchResults) {
+		sendResultInfoAsJson([
+			"results" => $searchResults,
+			"error" => ""
+		]);
 	}
-	
 ?>
