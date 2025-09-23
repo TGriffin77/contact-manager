@@ -56,7 +56,8 @@ function Register() {
 
     return (
         <div id="registerDiv">
-            <span id="inner-title">REGISTER A USER</span><br />
+            <span id="inner-title">Register Account!</span>
+            <span id="no-account">Already have an account? <Link id="no-account-signup" to="/login">Log in</Link></span>
             <input
                 type="text"
                 id="registerFirstName"
@@ -85,12 +86,12 @@ function Register() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
             /><br />
-            <button type="button" id="registerButton" onClick={doRegister}>
+            <span id="registerResult">{registerResult}</span>
+            <button type="button" id="registerButton" className="buttons" onClick={doRegister}>
                 Sign Up
             </button><br />
-            <span id="registerResult">{registerResult}</span>
+            
             <br />
-            <Link to="/login">Already a user? Sign in here!</Link>
         </div>
     );
 }

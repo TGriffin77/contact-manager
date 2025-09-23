@@ -1,6 +1,20 @@
 body 
 {
-    background-color: #e0f2f1;
+    background-color: #dbeeec;
+    max-width: 80rem;
+    margin: auto;
+}
+
+.lato-regular{
+    font-family: "Lato", sans-serif;
+    font-weight:400;
+    font-style:normal;
+}
+
+#root{
+    width: 100%;
+    margin-top:50%;
+    transform: translateY(-50%);
 }
 
 #title 
@@ -10,59 +24,40 @@ body
     margin: 2% 5%;
     text-align: center;
     font-family: 'Ubuntu', sans-serif;
-    color: #1b68a3;
+    color: #a31b1b;
 }
 
-#loginDiv, #loggedInDiv, #accessUIDiv 
+#loginDiv, #loggedInDiv,  #registerDiv 
 {
     font-size: 30px;
-    width: 70%;
+    width: 25%;
     margin:auto;
     padding: 25px;
-    background-color: #bbdefb;
+    background-color: #e5edf3;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-#registerDiv 
+#accessUIDiv
 {
     font-size: 30px;
-    width: 70%;
-    margin: auto;
+    width: 35%;
+    margin:auto;
     padding: 25px;
-    background-color: #bbdefb;
+    background-color: #e5edf3;
     border-radius: 15px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-#registerButton 
-{
-    font-size: 24px;
-    border-radius: 12px;
-    border: none;
-    background-color: #26a69a;
-    color: white;
-    padding: 10px 20px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-    width: auto;
-}
-
-#registerButton:hover 
-{
-    background-color: #00897b;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
 .buttons 
 {
     font-size: 24px;
-    border-radius: 12px;
+    border-radius: 24px;
     width: 50%;
     margin-left: 25%;
     font-family: 'Ubuntu', sans-serif;
     border: none;
-    background-color: #26a69a;
+    background-color: #0045a0;
     color: white;
     padding: 10px 0;
     transition: background-color 0.3s ease;
@@ -70,7 +65,7 @@ body
 
 .buttons:hover 
 {
-    background-color: #00897b;
+    background-color: #002f6c;
 }
 
 input[type="text"], input[type="password"] 
@@ -78,9 +73,9 @@ input[type="text"], input[type="password"]
     font-size: 18px;
     border-radius: 12px;
     border: 1px solid #b0bec5;
-    text-align: center;
-    width: 80%;
-    margin-left: 10%;
+    border-color: #ffffff;
+    text-align: left;
+    width:95%;
     margin-bottom: 20px;
     padding: 10px;
     font-family: 'Ubuntu', sans-serif;
@@ -93,20 +88,46 @@ input[type="text"], input[type="password"]
     font-size: 1em;
     width: 100%;
     text-align: center;
-    margin-bottom: 20px;
     font-family: 'Ubuntu', sans-serif;
     color: #3e2723;
+}
+
+#no-account{
+    display: inline-block;
+    font-size: 0.5em;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 24px;
+    font-family: 'Ubuntu', sans-serif;
+    color: #646c70
+}
+
+#no-account-signup{
+    display: inline;
+    width: 100%;
+    text-align: center;
+    margin-top: 4px;
+    font-family: 'Ubuntu', sans-serif;
+    color: #0045a0;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#no-account-signup:hover{
+    color: #002f6c;
+    text-decoration: underline;
 }
 
 #loginResult, #registerResult, #contactAddResult, #contactSearchResult 
 {
     display: block;
-    font-size: 0.9em;
+    font-size: 0.5em;
     width: 100%;
+    min-height: 18px;
     text-align: center;
     margin-top: 10px;
     font-family: 'Ubuntu', sans-serif;
-    color: #3a0505;
+    color: #ff0000;
 }
 
 #userName 
