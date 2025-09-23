@@ -114,7 +114,7 @@ function Contacts() {
         }
     };
 
-    const doDeleteContacts = async () => {
+    const doDeleteContacts = async (contact) => {
         const userData = readUserData();
         if (!userData) {
             setAddResult("You are not logged in.");
@@ -123,8 +123,8 @@ function Contacts() {
         
         const jsonPayload = {
             userId: userData.id,
-            firstName,
-            lastName
+            firstName: contact.firstName,
+            lastName: contact.lastName
         };
 
         try {
@@ -190,7 +190,7 @@ function Contacts() {
                 <button
                     onClick={() => {
                         if (window.confirm(`Are you sure you want to delete ${contact.FirstName} ${contact.LastName}?`)) {
-                            doDeleteContacts(contact.FirstName, contact.LastName);
+                            doDeleteContacts(contact);
                         }
                     }}
                 >

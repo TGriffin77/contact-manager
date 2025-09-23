@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const urlBase = 'http://localhost/LAMPAPI';
 const extension = 'php';
@@ -74,6 +74,8 @@ function Login() {
                  Sign In
             </button>
             <span id="loginResult">{loginResult}</span>
+            <br />
+            <Link to="/register">Don't have an account? Create one here!</Link>
         </div>
     );
 }

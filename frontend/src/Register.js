@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 //import md5 from './md5'; 
 
 const urlBase = 'http://localhost/LAMPAPI';
@@ -89,6 +89,8 @@ function Register() {
                 Sign Up
             </button><br />
             <span id="registerResult">{registerResult}</span>
+            <br />
+            <Link to="/login">Already a user? Sign in here!</Link>
         </div>
     );
 }
