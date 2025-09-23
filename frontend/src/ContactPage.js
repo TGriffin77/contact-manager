@@ -48,7 +48,7 @@ function Contacts() {
             userId: userData.id,
             firstName,
             lastName,
-            phone,
+            phone: phone.replace(/[-\(\)]/g, ""),
             email
         };
 

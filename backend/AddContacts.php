@@ -38,6 +38,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	} 
 	else
 	{
+		$dupeCheck = $conn->prepare("SELECT Id FROM Contacts WHERE UserId=? AND FirstName=? AND LastName=? AND Phone=? AND Email=?");
+		$dupeCheck->bind_param("issss", $userId, $firstName, $lastName, $phone, $email);		
+		$dupeCheck->execute();
+		$dupeCheck->store_result();
+
+		if ($dupeCheck->num_rows > 0){
+			returnWithError("Contact already exists.");
+			$dupeCheck->close();
+			$conn->close();
+			exit();
+		}
+		$dupeCheck->close();
+
 		$stmt = $conn->prepare("INSERT into Contacts (UserId,FirstName, LastName, Phone, Email) VALUES(?, ?, ?, ?, ?)");
 		$stmt->bind_param("issss", $userId, $firstName, $lastName, $phone, $email);
 		if ($stmt->execute()) {
