@@ -1,5 +1,7 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import Alert from './components/alert';
+import Contact from './components/contact';
 
 const urlBase = 'http://localhost/LAMPAPI';
 const extension = 'php';
@@ -14,6 +16,10 @@ function Contacts() {
     const [searchQuery, setSearchQuery] = useState('');
     const [searchMessage, setSearchMessage] = useState('');
     const [contactList, setContactList] = useState([]);
+
+    const [searching, setSearching] = useState(false);
+    const [adding, setAdding] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
     
     const navigate = useNavigate();
 
@@ -105,7 +111,7 @@ function Contacts() {
                 setSearchMessage(jsonObject.error);
                 setContactList([]);
             } else {
-                setSearchMessage(`Found ${jsonObject.results.length} contact(s):`);
+                setSearchMessage(`Found ${jsonObject.results.length} contact(s)`);
                 setContactList(jsonObject.results);
             }
         } catch (err) {
@@ -159,62 +165,101 @@ function Contacts() {
     };
 
     return (
-        <div id="accessUIDiv">
-            <div id="loggedInDiv">
-            <span id="userName">Hello, {readUserData()?.firstName}</span><br />
-            <button type="button" className="buttons" onClick={doLogout}>
-                Log Out
-            </button>
-        </div>
+        <>
+            {showAlert && <Alert message={addResult || searchMessage} trigger={setShowAlert} />}
+            <div id="accessUIDiv">
+                <button type="button" className="buttons" onClick={doLogout}>
+                    Log Out
+                </button>   
+                <span id="userName">Welcome back, {readUserData()?.firstName}</span>
 
-        <hr />
-
-        <input
-            type="text"
-            placeholder="Search Contacts"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-        />
-        <button className="buttons" onClick={doSearchContact}>
-            Search
-        </button>
-
-        <div>
-            <p>{searchMessage}</p>
-            <div id="contactList">
-            {contactList.map((contact, index) => (
-                <div key={index} className="contactItem">
-                <strong>{contact.FirstName} {contact.LastName}</strong><br />
-                Phone: {contact.Phone}<br />
-                Email: {contact.Email}<br /><br />
-                <button
-                    onClick={() => {
-                        if (window.confirm(`Are you sure you want to delete ${contact.FirstName} ${contact.LastName}?`)) {
-                            doDeleteContacts(contact);
-                        }
-                    }}
-                >
-                    Delete
-                </button>
-                <br /><br />
+                <div id="function-buttons">
+                    <button onClick={() => { setSearching(!searching); setAdding(false); }} className={`searchFunction ${searching ? 'active' : ''}`}>
+                        <span className="material-symbols--search-rounded" />
+                    </button>
+                    <button onClick={() => { setAdding(!adding); setSearching(false); }} className={`addFunction ${adding ? 'active' : ''}`}>
+                        <span className="material-symbols--add-2-rounded" />
+                    </button>
                 </div>
-            ))}
+                <div id="function-inputs">
+                    {!searching && !adding &&
+                        <p id="userName">To get started, select either the search or add buttons above.</p>
+                    }
+                    {searching && 
+                        <div>
+                            <input
+                                type="text"
+                                placeholder="Search Contacts"
+                                value={searchQuery}
+                                onChange={(e) => setSearchQuery(e.target.value)}
+                            />
+                            <button className="buttons" onClick={doSearchContact}>
+                                Search
+                            </button>
+                            <p>{searchMessage}</p>
+                        </div>
+                    }
+
+                    {adding && 
+                        <div>
+                            <input type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
+                            <input type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
+                            <input type="text" placeholder="Phone" value={phone} onChange={e => setPhone(e.target.value)} />
+                            <input type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+                            <button className="buttons" onClick={() => {doAddContacts(); setShowAlert(true); setTimeout(() => {setShowAlert(false); setAddResult('')}, 3000);}}>
+                                Add Contact
+                            </button>
+                            
+                        </div>
+                    }
+                </div>
             </div>
-        </div>
+            <div className={`accessUIDiv2 ${contactList && contactList.length > 0 ? 'active' : ''}`}>
+                    {contactList && contactList.length > 0 && 
+                    <div>
+                    
+                    <table id="contactList" border="1">
+                        <thead>
+                            <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Phone #</th>
+                                <th>Email</th>
+                                <th>Actions</th>
 
-        <hr />
+                            </tr>
+                        </thead>
+                        <tbody>
+                    {contactList.map((contact, index) => (
+                        <tr key={index}>
+                            <td>{contact.FirstName}</td>
+                            <td>{contact.LastName}</td>
+                            <td>{contact.Phone}</td>
+                            <td>{contact.Email}</td>
+                            <td>
+                                <button>
+                                <span className="material-symbols--edit-square-rounded" />
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        if (window.confirm(`Are you sure you want to delete ${contact.FirstName} ${contact.LastName}?`)) {
+                                            doDeleteContacts(contact);
+                                        }
+                                    }}
+                                >
+                                    <span className="material-symbols--delete" />
+                                </button>
+                            
+                            </td>
+                        </tr>
 
-        <input type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
-        <input type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
-        <input type="text" placeholder="Phone" value={phone} onChange={e => setPhone(e.target.value)} />
-        <input type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-        <button className="buttons" onClick={doAddContacts}>
-            Add Contact
-        </button>
-        <div>
-            <p>{addResult}</p>
-        </div>
-        </div>
+                    ))}
+                        </tbody>
+                    </table>
+                </div>
+                }
+            </div>
+        </>
     );
 }
 

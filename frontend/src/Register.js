@@ -75,7 +75,7 @@ function Register() {
             <input
                 type="text"
                 id="registerLogin"
-                placeholder="Login"
+                placeholder="Username"
                 value={login}
                 onChange={(e) => setLogin(e.target.value)}
             /><br />

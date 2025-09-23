@@ -41,12 +41,30 @@ body
 #accessUIDiv
 {
     font-size: 30px;
-    width: 35%;
+    width: 25%;
     margin:auto;
     padding: 25px;
     background-color: #e5edf3;
     border-radius: 15px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.accessUIDiv2{
+    font-size: 30px;
+    width: 25%;
+    border-style: dashed;
+    border-color: #6dbaf8;
+    min-height:320px;
+    margin:auto;
+    margin-top: 20px;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.accessUIDiv2.active{
+    background-color: #e5edf3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-style: none;
 }
 
 .buttons 
@@ -66,6 +84,7 @@ body
 .buttons:hover 
 {
     background-color: #002f6c;
+    cursor: pointer;
 }
 
 input[type="text"], input[type="password"] 
@@ -76,8 +95,8 @@ input[type="text"], input[type="password"]
     border-color: #ffffff;
     text-align: left;
     width:95%;
-    margin-bottom: 20px;
-    padding: 10px;
+    margin-bottom: 8px;
+    padding: 6px;
     font-family: 'Ubuntu', sans-serif;
     transition: border-color 0.3s ease;
 }
@@ -146,6 +165,43 @@ input[type="text"], input[type="password"]
     margin-left: 40%;
 }
 
+#function-buttons 
+{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    gap: 20px;
+    margin: 8px 0 4px 0;
+}
+
+#function-buttons button 
+{
+    background-color: #d4dce2;
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#function-buttons button:hover 
+{
+    background-color: #b8c0c4;
+}
+
+#function-buttons button.active 
+{
+    background-color: #6dbaf8;
+    color: #f1f1f1;
+}
+
+#function-inputs 
+{
+    margin-top: 10px;
+    width: 100%;
+    min-height:238px;
+}
+
 select 
 {
     width: 30%;
@@ -166,6 +222,15 @@ select
     color: #3a0505;
 }
 
+#contactList 
+{
+    width: 100%;
+    margin-top: 2%;
+    border-collapse: collapse;
+    font-family: 'Ubuntu', sans-serif;
+    font-size:0.65em;
+}
+
 #contactAddResult 
 {
     display: inline-block;
@@ -177,4 +242,99 @@ select
     margin-bottom: 1%;
     font-family: 'Ubuntu', sans-serif;
     color: #95060a;
+}
+
+.alert-container {
+    position: fixed;
+    display: inline-block;
+    background-color:#e5edf3;
+    border-radius: 12px;
+    width: 300px;
+    min-height: 56px;
+    padding: 16px;
+    right: 2rem;
+    z-index: 1000;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-color:#002f6c;
+    border-style: solid;
+    border-width: 1px;
+}
+
+.alert{
+    background-color: "#333";
+    color: "#fff";
+    padding: "10px 16px";
+    border-radius: "6px";
+    display: "flex";
+    align-items: "center";
+    gap: "8px";
+    box-shadow: "0 2px 8px rgba(0,0,0,0.2)";
+}
+
+.alert-close{
+    position: absolute;
+    top: 4px;
+    right:8px;
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: #a31b1b;
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.material-symbols--add-2-rounded {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12 21q-.425 0-.712-.288T11 20v-7H4q-.425 0-.712-.288T3 12t.288-.712T4 11h7V4q0-.425.288-.712T12 3t.713.288T13 4v7h7q.425 0 .713.288T21 12t-.288.713T20 13h-7v7q0 .425-.288.713T12 21'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.material-symbols--search-rounded {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l5.6 5.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-5.6-5.6q-.75.6-1.725.95T9.5 16m0-2q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.material-symbols--delete {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.material-symbols--edit-square-rounded {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M10 15q-.425 0-.712-.288T9 14v-2.425q0-.4.15-.763t.425-.637l8.6-8.6q.3-.3.675-.45t.75-.15q.4 0 .763.15t.662.45L22.425 3q.275.3.425.663T23 4.4t-.137.738t-.438.662l-8.6 8.6q-.275.275-.637.438t-.763.162zm9.6-9.2l1.425-1.4l-1.4-1.4L18.2 4.4zM5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h6.5q.35 0 .575.175t.35.45t.087.55t-.287.525l-4.65 4.65q-.275.275-.425.638T7 10.75V15q0 .825.588 1.412T9 17h4.225q.4 0 .763-.15t.637-.425L19.3 11.75q.25-.25.525-.288t.55.088t.45.35t.175.575V19q0 .825-.587 1.413T19 21z'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
 }
