@@ -55,7 +55,8 @@ function Login() {
 
     return (
         <div id="loginDiv">
-            <span id="inner-title">LOGIN TO YOUR CONTACT LIST</span>
+            <span id="inner-title">Welcome back!</span>
+            <span id="no-account">Don't have an account? <Link id="no-account-signup" to="/register">Sign up</Link></span>
             <input
                 type="text"
                 id="loginName"
@@ -70,12 +71,12 @@ function Login() {
                 value={loginPassword}
                 onChange={(e) => setLoginPassword(e.target.value)}
             /><br />
+            <span id="loginResult">{loginResult}</span>
             <button type="button" id="loginButton" className="buttons" onClick={doLogin}>
                  Sign In
             </button>
-            <span id="loginResult">{loginResult}</span>
+            
             <br />
-            <Link to="/register">Don't have an account? Create one here!</Link>
         </div>
     );
 }
