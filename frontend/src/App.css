@@ -289,45 +289,46 @@ select
     font-size:0.65em;
 }
 
-#contactList th, #contactList td {
-    border: 1px solid var(--border-color);
-}
-
-.contact-card {
-    background: var(--card-background);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    padding: 12px 16px;
-    margin-bottom: 12px;
+.contactItem
+{
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    box-shadow: 0 2px 6px var(--shadow-color);
+    height:77px;
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform .2s;
+    transition: background-color .2s;
+    transition: height 1s ease;
 }
 
-.contact-card-info {
+.contactItem.active{
+    height:100%;
+}
+
+.contactItem:hover
+{
+    transform: scale(1.02);
+    background-color: #f8f8f8;
+}
+
+#contactName
+{
+    font-size: 1em;
+}
+
+#nameParts{
     display: flex;
-    flex-direction: column;
     gap: 4px;
 }
 
-.contact-card-actions {
-    display: flex;
-    gap: 12px;
+#contactEmail, #contactPhone
+{
+    font-size: 0.6em;
+    color: #808080;
 }
-
-.contact-card-actions button {
-    background: none;
-    border: none;
-    cursor: pointer;
-    color: var(--primary-color);
-    font-size: 20px;
-}
-
-.contact-card-actions button:hover {
-    color: var(--secondary-color);
-}
-
 
 #contactAddResult 
 {
