@@ -300,46 +300,17 @@ function Contacts() {
                         }
                     </div>
                 </div>
-                <div className={`accessUIDiv2 ${contactList && contactList.length > 0 ? 'active' : ''}`}>
+                
+            </div>
+            <div className={`accessUIDiv2 ${contactList && contactList.length > 0 ? 'active' : ''}`}>
                     {contactList && contactList.length > 0 && 
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>First Name</th>
-                                    <th>Last Name</th>
-                                    <th>Phone</th>
-                                    <th>Email</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
+                        <>
                                 {contactList.map((contact, index) => (
-                                    <tr key={index}>
-                                        <td>{contact.FirstName}</td>
-                                        <td>{contact.LastName}</td>
-                                        <td>{contact.Phone}</td>
-                                        <td>{contact.Email}</td>
-                                        <td>
-                                            <button onClick={() => handleEdit(contact)}>
-                                                <span className="material-symbols--edit-square-rounded" />
-                                            </button>  
-                                            <button
-                                                onClick={() => {
-                                                    if (window.confirm(`Are you sure you want to delete ${contact.FirstName} ${contact.LastName}?`)) {
-                                                        doDeleteContacts(contact);
-                                                    }
-                                                }}
-                                            >
-                                                <span className="material-symbols--delete" />
-                                            </button>
-                                        </td>
-                                    </tr>
-                                ))}
-                            </tbody>
-                        </table>
+                                    <Contact key={index} contact={contact} onEdit={() => {doUpdateContacts()}} onDelete={doDeleteContacts}/>))}
+                                    
+                        </>
                     }
                 </div>
-            </div>
         </>
     );
 }
