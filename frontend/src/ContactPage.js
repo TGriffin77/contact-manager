@@ -26,11 +26,10 @@ function Contacts() {
     
     const navigate = useNavigate();
 
-    // Check if the user is logged in when the component loads
     useEffect(() => {
         const userData = localStorage.getItem('user_data');
         if (!userData) {
-            navigate('/login'); // Redirect to login if no user data is found
+            navigate('/login'); 
         }
     }, [navigate]);
 
@@ -45,7 +44,6 @@ function Contacts() {
         }
     };
 
-    // Based on your code.js file, this function adds a new contact
     const doAddContacts = async () => {
         const userData = readUserData();
         if (!userData) {

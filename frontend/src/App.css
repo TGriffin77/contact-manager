@@ -41,6 +41,10 @@ body
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
+@media only screen and (max-width: 900px){
+    
+}
+
 #accessUIDiv
 {
     font-size: 30px;
@@ -68,9 +72,38 @@ body
     background-color: #e5edf3;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-style: none;
-    max-height: 376px;
+    max-height: 320px;
     overflow-y: scroll;
 }
+@media only screen and (max-width: 1320px){
+    #loginDiv,  #registerDiv
+    {
+        width: 50vw;
+    }
+    #accessUIDiv
+    {
+        width: 50vw;
+    }
+    .accessUIDiv2
+    {
+        width:50vw;
+    }
+}
+@media only screen and (max-width: 600px){
+    #loginDiv,  #registerDiv
+    {
+        width: 75vw;
+    }
+    #accessUIDiv
+    {
+        width: 75vw;
+    }
+    .accessUIDiv2
+    {
+        width:75vw;
+    }
+}
+
 
 .buttons 
 {
