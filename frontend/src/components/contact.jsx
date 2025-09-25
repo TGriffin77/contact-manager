@@ -53,11 +53,17 @@ export default function Contact({ contact, onEdit, onDelete }) {
                 </div>
             ) : (
                 <div>
-                    <div><strong>Name:</strong> {contact.FirstName + " " + contact.LastName}</div>
-                    <div><strong>Email:</strong> {contact.Email}</div>
-                    <div><strong>Phone:</strong> {contact.Phone}</div>
+                    <div>{contact.FirstName + " " + contact.LastName}</div>
+                    <div>{contact.Email}</div>
+                    <div>{contact.Phone}</div>
                     <button onClick={handleEdit}>Edit</button>
-                    <button onClick={() => onDelete(contact)}>Delete</button>
+                    <button
+                                    onClick={() => {
+                                        if (window.confirm(`Are you sure you want to delete ${contact.FirstName} ${contact.LastName}?`)) {
+                                            onDelete(contact);
+                                        }
+                                    }}
+                                >Delete</button>
                 </div>
             )}
         </div>

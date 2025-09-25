@@ -2,20 +2,21 @@ body
 {
     background-color: #dbeeec;
     max-width: 80rem;
-    margin: auto;
-}
-
-.lato-regular{
-    font-family: "Lato", sans-serif;
-    font-weight:400;
-    font-style:normal;
+    margin:auto;
+    position: relative;
+    height:100vh;
 }
 
 #root{
     width: 100%;
+    max-height: 100vh;
+    position: absolute;
     margin-top:50%;
     transform: translateY(-50%);
+    width:100%;
 }
+
+
 
 #title 
 {
@@ -65,6 +66,8 @@ body
     background-color: #e5edf3;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     border-style: none;
+    max-height: 376px;
+    overflow-y: scroll;
 }
 
 .buttons 
