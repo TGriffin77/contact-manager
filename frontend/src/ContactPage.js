@@ -217,36 +217,11 @@ function Contacts() {
                 </div>
                 <div className={`accessUIDiv2 ${contactList && contactList.length > 0 ? 'active' : ''}`}>
                         {contactList && contactList.length > 0 && 
-                        <div>
-                        
-
-                        {contactList.map((contact, index) => (
-                            <Contact key={index} contact={contact} onDelete={doDeleteContacts} onEdit={() => {}} />
-                            // <tr key={index}>
-                            //     <td>{contact.FirstName}</td>
-                            //     <td>{contact.LastName}</td>
-                            //     <td>{contact.Phone}</td>
-                            //     <td>{contact.Email}</td>
-                            //     <td>
-                            //         <button>
-                            //         <span className="material-symbols--edit-square-rounded" />
-                            //         </button>
-                            //         <button
-                            //             onClick={() => {
-                            //                 if (window.confirm(`Are you sure you want to delete ${contact.FirstName} ${contact.LastName}?`)) {
-                            //                     doDeleteContacts(contact);
-                            //                 }
-                            //             }}
-                            //         >
-                            //             <span className="material-symbols--delete" />
-                            //         </button>
-                                
-                            //     </td>
-                            // </tr>
-
-                        ))}
-
-                    </div>
+                            <>
+                                {contactList.map((contact, index) => (
+                                    <Contact key={index} contact={contact} onDelete={doDeleteContacts} onEdit={() => {}} />
+                                ))}
+                        </>
                     }
                 </div>
             </div>
