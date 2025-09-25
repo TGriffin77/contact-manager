@@ -20,14 +20,16 @@ function Contacts() {
     const [searching, setSearching] = useState(false);
     const [adding, setAdding] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
+
+    const [isEditing, setIsEditing] = useState(false);
+    const [currentContact, setCurrentContact] = useState(null);
     
     const navigate = useNavigate();
 
-    // Check if the user is logged in when the component loads
     useEffect(() => {
         const userData = localStorage.getItem('user_data');
         if (!userData) {
-            navigate('/login'); // Redirect to login if no user data is found
+            navigate('/login'); 
         }
     }, [navigate]);
 
@@ -42,7 +44,6 @@ function Contacts() {
         }
     };
 
-    // Based on your code.js file, this function adds a new contact
     const doAddContacts = async () => {
         const userData = readUserData();
         if (!userData) {
@@ -129,8 +130,10 @@ function Contacts() {
         
         const jsonPayload = {
             userId: userData.id,
-            firstName: contact.firstName,
-            lastName: contact.lastName
+            firstName: contact.FirstName,
+            lastName: contact.LastName,
+            phone: contact.Phone,
+            email: contact.Email
         };
 
         try {
@@ -147,9 +150,7 @@ function Contacts() {
                 alert(result.message);
 
                 setContactList(prevList =>
-                    prevList.filter(
-                        contact => !(contact.FirstName === firstName && contact.LastName === lastName)
-                    )
+                    prevList.filter(c => c.ID !== contact.ID)
                 );
             } else {
                 alert(result.error);
@@ -157,6 +158,75 @@ function Contacts() {
         } catch (err) {
             alert(err.message);
         }
+    };
+
+    const doUpdateContacts = async () => {
+        const userData = readUserData();
+        if (!userData || !currentContact) {
+            setAddResult("You are not logged in.");
+            return;
+        }
+        
+        const jsonPayload = {
+            userId: userData.id,
+            id: currentContact.id,
+            firstName: firstName,
+            lastName: lastName,
+            phone: phone,
+            email: email
+        };
+
+        try {
+            const response = await fetch(`${urlBase}/UpdateContacts.${extension}`, {
+                method: 'POST',
+                body: JSON.stringify(jsonPayload),
+                headers: {
+                    'Content-type': 'application/json; charset=UTF-8'
+                }
+            });
+            const result = await response.json();
+
+            if (result.success) {
+                setAddResult("Contact updated successfully!");
+                
+                setContactList(prevList =>
+                    prevList.map(c =>
+                        c.ID === currentContact.ID ? { ...c, FirstName: firstName, LastName: lastName, Phone: phone, Email: email } : c
+                    )
+                );
+                
+                setIsEditing(false);
+                setFirstName('');
+                setLastName('');
+                setPhone('');
+                setEmail('');
+                setCurrentContact(null);
+            } else {
+                alert(result.error);
+            }
+        } catch (err) {
+            alert(err.message);
+        }
+    };
+
+    const handleEdit = (contact) => {
+        setAdding(false);
+        setSearching(false);
+        setIsEditing(true);
+        setCurrentContact(contact);
+        setFirstName(contact.FirstName);
+        setLastName(contact.LastName);
+        setPhone(contact.Phone);
+        setEmail(contact.Email);
+    };
+
+    const handleCancelEdit = () => {
+        setIsEditing(false);
+        setFirstName('');
+        setLastName('');
+        setPhone('');
+        setEmail('');
+        setCurrentContact(null);
     };
 
     const doLogout = () => {
@@ -201,6 +271,21 @@ function Contacts() {
                             </div>
                         }
 
+                        {isEditing && (
+                            <div>
+                                <input type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
+                                <input type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
+                                <input type="text" placeholder="Phone" value={phone} onChange={e => setPhone(e.target.value)} />
+                                <input type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
+                                <button className="buttons" onClick={() => { doUpdateContacts(); setShowAlert(true); setTimeout(() => { setShowAlert(false); setAddResult('') }, 3000); }}>
+                                    Save Changes
+                                </button>
+                                <button className="buttons" onClick={handleCancelEdit}>
+                                    Cancel
+                                </button>
+                            </div>
+                        )}
+
                         {adding && 
                             <div>
                                 <input type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
@@ -216,12 +301,42 @@ function Contacts() {
                     </div>
                 </div>
                 <div className={`accessUIDiv2 ${contactList && contactList.length > 0 ? 'active' : ''}`}>
-                        {contactList && contactList.length > 0 && 
-                            <>
+                    {contactList && contactList.length > 0 && 
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>First Name</th>
+                                    <th>Last Name</th>
+                                    <th>Phone</th>
+                                    <th>Email</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
                                 {contactList.map((contact, index) => (
-                                    <Contact key={index} contact={contact} onDelete={doDeleteContacts} onEdit={() => {}} />
+                                    <tr key={index}>
+                                        <td>{contact.FirstName}</td>
+                                        <td>{contact.LastName}</td>
+                                        <td>{contact.Phone}</td>
+                                        <td>{contact.Email}</td>
+                                        <td>
+                                            <button onClick={() => handleEdit(contact)}>
+                                                <span className="material-symbols--edit-square-rounded" />
+                                            </button>  
+                                            <button
+                                                onClick={() => {
+                                                    if (window.confirm(`Are you sure you want to delete ${contact.FirstName} ${contact.LastName}?`)) {
+                                                        doDeleteContacts(contact);
+                                                    }
+                                                }}
+                                            >
+                                                <span className="material-symbols--delete" />
+                                            </button>
+                                        </td>
+                                    </tr>
                                 ))}
-                        </>
+                            </tbody>
+                        </table>
                     }
                 </div>
             </div>
