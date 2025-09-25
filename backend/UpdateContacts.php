@@ -20,10 +20,18 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 	{
 		$stmt = $conn->prepare("UPDATE Contacts SET firstName = ?, lastName = ?, phone = ?, email = ? WHERE userId = ?");
 		$stmt->bind_param("ssssi", $firstName, $lastName, $phone, $email, $userId);
-		$stmt->execute();
+		if ($stmt->execute()) {
+			if ($stmt->affected_rows > 0) {
+				returnWithSuccess("Contact updated!");
+			} else {
+				returnWithError("No matching contact found to update or no changes were made.");
+			}
+    	} else {
+            returnWithError($stmt->error);
+        }
+
 		$stmt->close();
-		$conn->close();
-		returnWithError("");
+		$conn->close();	
 	}
 
 	function getRequestInfo()

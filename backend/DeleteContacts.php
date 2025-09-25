@@ -13,6 +13,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	$userId = $inData["userId"] ?? null;
     $firstName = $inData["firstName"] ?? null;
     $lastName = $inData["lastName"] ?? null;
+	$phone = $inData["phone"] ?? null;
+	$email = $inData["email"] ?? null;
 
 	$conn = new mysqli("localhost", "root", "", "COP4331");
 	if ($conn->connect_error) 
@@ -21,13 +23,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 	} 
 	else
 	{
-		$stmt = $conn->prepare("DELETE FROM Contacts WHERE userId = ? AND firstName = ? AND lastName = ?");
-		$stmt->bind_param("iss", $userId, $firstName, $lastName);
+		$stmt = $conn->prepare("DELETE FROM Contacts WHERE UserId=? AND FirstName=? AND LastName=? AND Phone=? AND Email=?");
+		$stmt->bind_param("issss", $userId, $firstName, $lastName, $phone, $email);
 		if ($stmt->execute()) {
+            if ($stmt->affected_rows > 0) {
             returnWithSuccess("Contact was deleted!");
+            } else {
+                returnWithError("No matching contact found to delete.");
+            }
         } else {
             returnWithError($stmt->error);
         }
+
 
         $stmt->close();
         $conn->close();
