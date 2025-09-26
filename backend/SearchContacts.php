@@ -18,12 +18,12 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 		$stmt = $conn->prepare(
     		"SELECT FirstName, LastName, Phone, Email, ID
      		FROM Contacts 
-     		WHERE (FirstName LIKE ? OR LastName LIKE ? OR Phone LIKE ? OR Email LIKE ?) 
+     		WHERE (FirstName LIKE ? OR LastName LIKE ?) 
      		AND UserID=?"
 		);
 
 		$search = "%" . $inData["search"] . "%";
-		$stmt->bind_param("ssssi", $search, $search, $search, $search, $inData["userId"]);
+		$stmt->bind_param("ssi", $search, $search, $inData["userId"]);
 		$stmt->execute();
 		
 		$result = $stmt->get_result();

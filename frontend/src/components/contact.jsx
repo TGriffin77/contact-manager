@@ -83,7 +83,7 @@ export default function Contact({ contact, onEdit, onDelete }) {
                     <button onClick={handleCancel}>Cancel</button>
                 </div>
             ) : (
-                <div>
+                <div id="contactInfo">
                     <div id="contactName">{contact.FirstName + " " + contact.LastName}</div>
                     <div id="contactEmail">{contact.Email}</div>
                     <div id="contactPhone">{contact.Phone}</div>
