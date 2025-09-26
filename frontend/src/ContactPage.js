@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Alert from './components/alert';
 import Contact from './components/contact';
 
-const urlBase = 'http://localhost/LAMPAPI';
+const urlBase = 'http://localhost:8888/LAMPAPI';
 const extension = 'php';
 
 function Contacts() {
@@ -133,7 +133,8 @@ function Contacts() {
             firstName: contact.FirstName,
             lastName: contact.LastName,
             phone: contact.Phone,
-            email: contact.Email
+            email: contact.Email,
+            id: contact.id
         };
 
         try {
@@ -160,22 +161,23 @@ function Contacts() {
         }
     };
 
-    const doUpdateContacts = async () => {
+    const saveUpdateContact = async (ID, FirstName, LastName, Email, Phone) => {
         const userData = readUserData();
-        if (!userData || !currentContact) {
+        if (!userData) {
             setAddResult("You are not logged in.");
             return;
         }
-        
+
         const jsonPayload = {
             userId: userData.id,
-            id: currentContact.id,
-            firstName: firstName,
-            lastName: lastName,
-            phone: phone,
-            email: email
+            id: ID,
+            firstName: FirstName,
+            lastName: LastName,
+            phone: Phone,
+            email: Email
         };
 
+        console.log(jsonPayload);
         try {
             const response = await fetch(`${urlBase}/UpdateContacts.${extension}`, {
                 method: 'POST',
@@ -184,50 +186,21 @@ function Contacts() {
                     'Content-type': 'application/json; charset=UTF-8'
                 }
             });
+            console.log(response);
             const result = await response.json();
+            
 
             if (result.success) {
                 setAddResult("Contact updated successfully!");
                 
-                setContactList(prevList =>
-                    prevList.map(c =>
-                        c.ID === currentContact.ID ? { ...c, FirstName: firstName, LastName: lastName, Phone: phone, Email: email } : c
-                    )
-                );
                 
-                setIsEditing(false);
-                setFirstName('');
-                setLastName('');
-                setPhone('');
-                setEmail('');
-                setCurrentContact(null);
             } else {
                 alert(result.error);
             }
         } catch (err) {
             alert(err.message);
         }
-    };
-
-    const handleEdit = (contact) => {
-        setAdding(false);
-        setSearching(false);
-        setIsEditing(true);
-        setCurrentContact(contact);
-        setFirstName(contact.FirstName);
-        setLastName(contact.LastName);
-        setPhone(contact.Phone);
-        setEmail(contact.Email);
-    };
-
-    const handleCancelEdit = () => {
-        setIsEditing(false);
-        setFirstName('');
-        setLastName('');
-        setPhone('');
-        setEmail('');
-        setCurrentContact(null);
-    };
+    }
 
     const doLogout = () => {
         localStorage.clear();
@@ -271,21 +244,6 @@ function Contacts() {
                             </div>
                         }
 
-                        {isEditing && (
-                            <div>
-                                <input type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
-                                <input type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
-                                <input type="text" placeholder="Phone" value={phone} onChange={e => setPhone(e.target.value)} />
-                                <input type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-                                <button className="buttons" onClick={() => { doUpdateContacts(); setShowAlert(true); setTimeout(() => { setShowAlert(false); setAddResult('') }, 3000); }}>
-                                    Save Changes
-                                </button>
-                                <button className="buttons" onClick={handleCancelEdit}>
-                                    Cancel
-                                </button>
-                            </div>
-                        )}
-
                         {adding && 
                             <div>
                                 <input type="text" placeholder="First Name" value={firstName} onChange={e => setFirstName(e.target.value)} />
@@ -307,7 +265,7 @@ function Contacts() {
                                         <Contact 
                                             key={index} 
                                             contact={contact} 
-                                            onEdit={() => handleEdit(contact)} 
+                                            onEdit={saveUpdateContact} 
                                             onDelete={() => doDeleteContacts(contact)} 
                                         />
                                     ))}

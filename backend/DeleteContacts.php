@@ -15,8 +15,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
     $lastName = $inData["lastName"] ?? null;
 	$phone = $inData["phone"] ?? null;
 	$email = $inData["email"] ?? null;
+    
 
-	$conn = new mysqli("localhost", "root", "", "COP4331");
+	$conn = new mysqli("localhost", "root", "root", "COP4331");
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );

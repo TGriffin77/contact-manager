@@ -25,13 +25,13 @@ export default function Contact({ contact, onEdit, onDelete }) {
     };
 
     const handleSave = () => {
-        onEdit({
-            ...contact,
-            FirstName: editedContact.firstName,
-            LastName: editedContact.lastName,
-            Email: editedContact.email,
-            Phone: editedContact.phone
-        });
+        onEdit(
+            contact.ID,
+            editedContact.firstName,
+            editedContact.lastName,
+            editedContact.email,
+            editedContact.phone
+        );
         setIsEditing(false);
     };
 

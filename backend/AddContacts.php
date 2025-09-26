@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'OPTIONS') {
 		exit();
 	}
 
-	$conn = new mysqli("localhost", "root", "", "COP4331");
+	$conn = new mysqli("localhost", "root", "root", "COP4331");
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );

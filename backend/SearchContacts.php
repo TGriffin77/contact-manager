@@ -8,7 +8,7 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 	$searchResults = "";
 	$searchCount = 0;
 
-	$conn = new mysqli("localhost", "root", "", "COP4331");
+	$conn = new mysqli("localhost", "root", "root", "COP4331");
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
@@ -16,7 +16,7 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 	else
 	{
 		$stmt = $conn->prepare(
-    		"SELECT FirstName, LastName, Phone, Email 
+    		"SELECT FirstName, LastName, Phone, Email, ID
      		FROM Contacts 
      		WHERE (FirstName LIKE ? OR LastName LIKE ? OR Phone LIKE ? OR Email LIKE ?) 
      		AND UserID=?"

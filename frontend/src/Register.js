@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 //import md5 from './md5'; 
 
-const urlBase = 'http://localhost/LAMPAPI';
+const urlBase = 'http://localhost:8888/LAMPAPI';
 const extension = 'php';
 
 function Register() {

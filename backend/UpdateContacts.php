@@ -10,16 +10,17 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 	$lastName = $inData["lastName"];
 	$phone = $inData["phone"];
 	$email = $inData["email"];
+	$id = $inData["id"];
 
-	$conn = new mysqli("localhost", "root", "", "COP4331");
+	$conn = new mysqli("localhost", "root", "root", "COP4331");
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
 	} 
 	else
 	{
-		$stmt = $conn->prepare("UPDATE Contacts SET firstName = ?, lastName = ?, phone = ?, email = ? WHERE userId = ?");
-		$stmt->bind_param("ssssi", $firstName, $lastName, $phone, $email, $userId);
+		$stmt = $conn->prepare("UPDATE Contacts SET firstName = ?, lastName = ?, phone = ?, email = ? WHERE userId = ? AND ID = ?");
+		$stmt->bind_param("ssssii", $firstName, $lastName, $phone, $email, $userId, $id);
 		if ($stmt->execute()) {
 			if ($stmt->affected_rows > 0) {
 				returnWithSuccess("Contact updated!");
@@ -42,7 +43,7 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 	function sendResultInfoAsJson( $obj )
 	{
 		header('Content-type: application/json');
-		echo $obj;
+		echo json_encode($obj);
 	}
 	
 	function returnWithError( $err )
@@ -51,4 +52,10 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 		sendResultInfoAsJson( $retValue );
 	}
 	
+	function returnWithSuccess($message) {
+        sendResultInfoAsJson([
+            "success" => true,
+            "message" => $message
+        ]);
+    }
 ?>

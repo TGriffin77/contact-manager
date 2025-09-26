@@ -10,7 +10,7 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
     $login = $inData["login"];
     $password = $inData["password"];
 
-	$conn = new mysqli("localhost", "root", "", "COP4331");	
+	$conn = new mysqli("localhost", "root", "root", "COP4331");	
 	if( $conn->connect_error )
 	{	
 		returnWithError( $conn->connect_error );
