@@ -11,18 +11,15 @@ function Contacts() {
     const [lastName, setLastName] = useState('');
     const [phone, setPhone] = useState('');
     const [email, setEmail] = useState('');
-    const [addResult, setAddResult] = useState('');
 
     const [searchQuery, setSearchQuery] = useState('');
-    const [searchMessage, setSearchMessage] = useState('');
     const [contactList, setContactList] = useState([]);
 
     const [searching, setSearching] = useState(false);
     const [adding, setAdding] = useState(false);
     const [showAlert, setShowAlert] = useState(false);
 
-    const [isEditing, setIsEditing] = useState(false);
-    const [currentContact, setCurrentContact] = useState(null);
+    const [resultMessage, setResultMessage] = useState('');
     
     const navigate = useNavigate();
 
@@ -47,7 +44,7 @@ function Contacts() {
     const doAddContacts = async () => {
         const userData = readUserData();
         if (!userData) {
-            setAddResult("You are not logged in.");
+            setResultMessage("You are not logged in.");
             return;
         }
         
@@ -70,30 +67,30 @@ function Contacts() {
             const result = await response.json();
 
             if (result.success) {
-                setAddResult("Contact has been added!");
+                setResultMessage("Contact has been added!");
                 // clear input fields
                 setFirstName('');
                 setLastName('');
                 setPhone('');
                 setEmail('');
             } else {
-                setAddResult(result.error || "Failed to add contact.");
+                setResultMessage(result.error || "Failed to add contact.");
             }
         } catch (err) {
-            setAddResult(err.message);
+            setResultMessage(err.message);
         }
     };
 
     const doSearchContact = async () => {
         const userData = readUserData();
         if (!userData) {
-            setSearchMessage("You are not logged in.");
+            setResultMessage("You are not logged in.");
             return;
         }
         
         const userId = userData.id;
 
-        setSearchMessage('');
+        setResultMessage('');
         const tmp = { search: searchQuery, userId: userId };
         const jsonPayload = JSON.stringify(tmp);
         const url = `${urlBase}/SearchContacts.${extension}`;
@@ -109,14 +106,14 @@ function Contacts() {
             const jsonObject = await response.json();
 
             if (jsonObject.error) {
-                setSearchMessage(jsonObject.error);
+                setResultMessage(jsonObject.error);
                 setContactList([]);
             } else {
-                setSearchMessage(`Found ${jsonObject.results.length} contact(s)`);
+                setResultMessage(`Found ${jsonObject.results.length} contact(s)`);
                 setContactList(jsonObject.results);
             }
         } catch (err) {
-            setSearchMessage(err.message);
+            setResultMessage(err.message);
             setContactList([]);
         }
     };
@@ -124,7 +121,7 @@ function Contacts() {
     const doDeleteContacts = async (contact) => {
         const userData = readUserData();
         if (!userData) {
-            setAddResult("You are not logged in.");
+            setResultMessage("You are not logged in.");
             return;
         }
         
@@ -148,23 +145,23 @@ function Contacts() {
             const result = await response.json();
 
             if (result.success) {
-                alert(result.message);
+                setResultMessage(result.message);
 
                 setContactList(prevList =>
                     prevList.filter(c => c.ID !== contact.ID)
                 );
             } else {
-                alert(result.error);
+                setResultMessage(result.error);
             }
         } catch (err) {
-            alert(err.message);
+            setResultMessage(err.message);
         }
     };
 
     const saveUpdateContact = async (ID, FirstName, LastName, Email, Phone) => {
         const userData = readUserData();
         if (!userData) {
-            setAddResult("You are not logged in.");
+            setResultMessage("You are not logged in.");
             return;
         }
 
@@ -177,7 +174,6 @@ function Contacts() {
             email: Email
         };
 
-        console.log(jsonPayload);
         try {
             const response = await fetch(`${urlBase}/UpdateContacts.${extension}`, {
                 method: 'POST',
@@ -186,20 +182,47 @@ function Contacts() {
                     'Content-type': 'application/json; charset=UTF-8'
                 }
             });
-            console.log(response);
             const result = await response.json();
             
 
             if (result.success) {
-                setAddResult("Contact updated successfully!");
+                setResultMessage("Contact updated successfully!");
                 
-                doSearchContact();
+                setContactList(prev =>
+                    prev.map(item =>
+                        item.ID === ID ? {...item, Email: Email, FirstName: FirstName, LastName: LastName, Phone: Phone} : item
+                    )
+                );
+
             } else {
-                alert(result.error);
+                setResultMessage(result.error);
             }
         } catch (err) {
-            alert(err.message);
+            setResultMessage(err.message);
         }
+    }
+
+    const handleSearch = () => {
+        doSearchContact()
+        alertPopup()
+    }
+
+    const handleAdd = () => {
+        doAddContacts();
+        alertPopup();
+    }
+
+    const handleDelete = (contact) => {
+        doDeleteContacts(contact);
+        alertPopup();
+    }
+
+    const alertPopup = () => {
+        setShowAlert(true);
+        setTimeout(() => 
+            {
+                setShowAlert(false); setResultMessage('')
+            }, 3000);
     }
 
     const doLogout = () => {
@@ -209,7 +232,7 @@ function Contacts() {
 
     return (
         <>
-            {showAlert && <Alert message={addResult || searchMessage} trigger={setShowAlert} />}
+            {showAlert && <Alert message={resultMessage} trigger={setShowAlert} />}
             <div className="contact-main">
                 <div id="accessUIDiv">
                     <button type="button" aria-label="Log out" className="buttons" onClick={doLogout}>
@@ -237,10 +260,9 @@ function Contacts() {
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                 />
-                                <button className="buttons"  aria-label="Search now" onClick={doSearchContact}>
+                                <button className="buttons"  aria-label="Search now" onClick={handleSearch}>
                                     Search
                                 </button>
-                                <p>{searchMessage}</p>
                             </div>
                         }
 
@@ -250,7 +272,7 @@ function Contacts() {
                                 <input type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
                                 <input type="text" placeholder="Phone" value={phone} onChange={e => setPhone(e.target.value)} />
                                 <input type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-                                <button className="buttons" aria-label="Add contact" onClick={() => {doAddContacts(); setShowAlert(true); setTimeout(() => {setShowAlert(false); setAddResult('')}, 3000);}}>
+                                <button className="buttons" aria-label="Add contact" onClick={handleAdd}>
                                     Add Contact
                                 </button>
                                 
@@ -266,7 +288,8 @@ function Contacts() {
                                             key={index} 
                                             contact={contact} 
                                             onEdit={saveUpdateContact} 
-                                            onDelete={() => doDeleteContacts(contact)} 
+                                            onDelete={() => handleDelete(contact)} 
+                                            onAlert = {alertPopup}
                                         />
                                     ))}
                                         

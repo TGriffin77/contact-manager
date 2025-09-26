@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-export default function Contact({ contact, onEdit, onDelete }) {
+export default function Contact({ contact, onEdit, onDelete, onAlert }) {
     const [isEditing, setIsEditing] = useState(false);
     const [editedContact, setEditedContact] = useState({
         firstName: contact.FirstName,
@@ -33,6 +33,7 @@ export default function Contact({ contact, onEdit, onDelete }) {
             editedContact.phone
         );
         setIsEditing(false);
+        onAlert();
     };
 
     const handleCancel = () => {
