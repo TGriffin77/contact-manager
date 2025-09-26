@@ -87,7 +87,7 @@ function Register() {
                 onChange={(e) => setPassword(e.target.value)}
             /><br />
             <span id="registerResult">{registerResult}</span>
-            <button type="button" id="registerButton" className="buttons" onClick={doRegister}>
+            <button type="button"  aria-label="register" id="registerButton" className="buttons" onClick={doRegister}>
                 Sign Up
             </button><br />
             

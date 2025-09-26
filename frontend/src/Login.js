@@ -72,7 +72,7 @@ function Login() {
                 onChange={(e) => setLoginPassword(e.target.value)}
             /><br />
             <span id="loginResult">{loginResult}</span>
-            <button type="button" id="loginButton" className="buttons" onClick={doLogin}>
+            <button type="button" aria-label="Sign in" id="loginButton" className="buttons" onClick={doLogin}>
                  Sign In
             </button>
             

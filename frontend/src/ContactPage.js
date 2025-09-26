@@ -193,7 +193,7 @@ function Contacts() {
             if (result.success) {
                 setAddResult("Contact updated successfully!");
                 
-                
+                doSearchContact();
             } else {
                 alert(result.error);
             }
@@ -212,16 +212,16 @@ function Contacts() {
             {showAlert && <Alert message={addResult || searchMessage} trigger={setShowAlert} />}
             <div className="contact-main">
                 <div id="accessUIDiv">
-                    <button type="button" className="buttons" onClick={doLogout}>
+                    <button type="button" aria-label="Log out" className="buttons" onClick={doLogout}>
                         Log Out
                     </button>   
                     <span id="userName">Welcome back, {readUserData()?.firstName}</span>
 
                     <div id="function-buttons">
-                        <button onClick={() => { setSearching(!searching); setAdding(false); }} className={`searchFunction ${searching ? 'active' : ''}`}>
+                        <button aria-label="search" onClick={() => { setSearching(!searching); setAdding(false); }} className={`searchFunction ${searching ? 'active' : ''}`}>
                             <span className="material-symbols--search-rounded" />
                         </button>
-                        <button onClick={() => { setAdding(!adding); setSearching(false); }} className={`addFunction ${adding ? 'active' : ''}`}>
+                        <button aria-label="add" onClick={() => { setAdding(!adding); setSearching(false); }} className={`addFunction ${adding ? 'active' : ''}`}>
                             <span className="material-symbols--add-2-rounded" />
                         </button>
                     </div>
@@ -237,7 +237,7 @@ function Contacts() {
                                     value={searchQuery}
                                     onChange={(e) => setSearchQuery(e.target.value)}
                                 />
-                                <button className="buttons" onClick={doSearchContact}>
+                                <button className="buttons"  aria-label="Search now" onClick={doSearchContact}>
                                     Search
                                 </button>
                                 <p>{searchMessage}</p>
@@ -250,7 +250,7 @@ function Contacts() {
                                 <input type="text" placeholder="Last Name" value={lastName} onChange={e => setLastName(e.target.value)} />
                                 <input type="text" placeholder="Phone" value={phone} onChange={e => setPhone(e.target.value)} />
                                 <input type="text" placeholder="Email" value={email} onChange={e => setEmail(e.target.value)} />
-                                <button className="buttons" onClick={() => {doAddContacts(); setShowAlert(true); setTimeout(() => {setShowAlert(false); setAddResult('')}, 3000);}}>
+                                <button className="buttons" aria-label="Add contact" onClick={() => {doAddContacts(); setShowAlert(true); setTimeout(() => {setShowAlert(false); setAddResult('')}, 3000);}}>
                                     Add Contact
                                 </button>
                                 
