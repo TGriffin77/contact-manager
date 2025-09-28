@@ -1,0 +1,495 @@
+:root {
+  /* "Winter chill" color palette */
+  --color-crimson: #5298c0;
+  --color-indigo: #30415D;
+  --color-ultramarine: #031424;
+  --color-light-blue: #8EAABD;
+  --color-off-white: #F1F6F9;
+  --color-black: #000000;
+
+  /* Mapped UI colors */
+  --primary-color: var(--color-indigo);
+  --secondary-color: var(--color-ultramarine);
+  --text-primary: var(--color-black);
+  --text-secondary: var(--color-light-blue);
+  --background-color: var(--color-crimson);
+  --card-background: var(--color-off-white);
+  --button-hover: #374A6A; /* A slightly darker shade of indigo */
+  --shadow-color: rgba(0, 0, 0, 0.25);
+  --border-color: var(--color-light-blue);
+}
+
+body 
+{
+    background-color: var(--background-color);
+    max-width: 80rem;
+    margin:auto;
+    position: relative;
+    height:100vh;
+    display:grid;
+}
+
+#root{
+    width: 100%;
+    max-height: 100vh;
+    margin:auto;
+    
+    /* margin-top:50%;
+    transform: translateY(-50%); */
+    width:100%;
+}
+
+
+
+#title 
+{
+    font-size: 40px;
+    width: 100%;
+    margin: 2% 5%;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--primary-color);
+}
+
+#loginDiv, #loggedInDiv,  #registerDiv 
+{
+    font-size: 30px;
+    width: 25%;
+    margin:auto;
+    padding: 25px;
+    background-color: var(--card-background);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+@media only screen and (max-width: 900px){
+    
+}
+
+#accessUIDiv
+{
+    font-size: 30px;
+    width: 25%;
+    margin:auto;
+    padding: 25px;
+    background-color: var(--card-background);
+    border-radius: 15px;
+    box-shadow: 0 4px 8px var(--shadow-color);
+}
+
+.accessUIDiv2{
+    font-size: 30px;
+    width: 25%;
+    border-style: dashed;
+    border-color: var(--primary-color);
+    min-height:320px;
+    margin:auto;
+    margin-top: 20px;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+.accessUIDiv2.active{
+    background-color: var(--card-background);
+    box-shadow: 0 4px 8px var(--shadow-color);
+    border-style: none;
+    max-height: 320px;
+    overflow-y: scroll;
+}
+@media only screen and (max-width: 1320px){
+    #loginDiv,  #registerDiv
+    {
+        width: 50vw;
+    }
+    #accessUIDiv
+    {
+        width: 50vw;
+    }
+    .accessUIDiv2
+    {
+        width:50vw;
+    }
+}
+@media only screen and (max-width: 600px){
+    #loginDiv,  #registerDiv
+    {
+        width: 75vw;
+    }
+    #accessUIDiv
+    {
+        width: 75vw;
+    }
+    .accessUIDiv2
+    {
+        width:75vw;
+    }
+}
+
+
+.buttons 
+{
+    font-size: 24px;
+    border-radius: 24px;
+    width: 50%;
+    margin-left: 25%;
+    font-family: 'Ubuntu', sans-serif;
+    border: none;
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px 0;
+    transition: background-color 0.3s ease;
+}
+
+.buttons:hover 
+{
+    background-color: var(--button-hover);
+    cursor: pointer;
+}
+
+input[type="text"], input[type="password"] 
+{
+    font-size: 18px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    border-color: var(--card-background);
+    text-align: left;
+    width:95%;
+    margin-bottom: 8px;
+    padding: 6px;
+    font-family: 'Ubuntu', sans-serif;
+    transition: border-color 0.3s ease;
+}
+
+#inner-title 
+{
+    display: block;
+    font-size: 1em;
+    width: 100%;
+    text-align: center;
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--text-primary);
+}
+
+#no-account{
+    display: inline-block;
+    font-size: 0.5em;
+    width: 100%;
+    text-align: center;
+    margin-bottom: 24px;
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--text-secondary)
+}
+
+#no-account-signup{
+    display: inline;
+    width: 100%;
+    text-align: center;
+    margin-top: 4px;
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--primary-color);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+#no-account-signup:hover{
+    color: var(--secondary-color);
+    text-decoration: underline;
+}
+
+#loginResult, #registerResult, #contactAddResult, #contactSearchResult 
+{
+    display: block;
+    font-size: 0.5em;
+    width: 100%;
+    min-height: 18px;
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--text-primary);
+}
+
+#userName 
+{
+    display: inline-block;
+    width: 80%;
+    margin-left: 10%;
+    text-align: center;
+    color: var(--primary-color);
+    font-size: 20px;
+}
+
+#logoutButton 
+{
+    width: 20%;
+    margin-left: 40%;
+}
+
+#function-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 16px;
+    margin: 12px 0;
+}
+
+#function-buttons button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 48px;
+    height: 48px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.3s ease;
+}
+
+#function-buttons button:hover {
+    background-color: var(--button-hover);
+}
+
+#function-buttons button.active {
+    background-color: var(--secondary-color);
+}
+
+
+#function-inputs 
+{
+    margin-top: 10px;
+    width: 100%;
+    min-height:238px;
+}
+
+select 
+{
+    width: 30%;
+    margin-left: 35%;
+    margin-top: 2%;
+    font-size: 0.75em;
+    font-family: 'Ubuntu', sans-serif;
+}
+
+#contactSearchResult 
+{
+    display: block;
+    font-size: 0.9em;
+    width: 100%;
+    text-align: center;
+    margin-top: 10px;
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--text-primary);
+}
+
+#contactList 
+{
+    width: 100%;
+    margin-top: 2%;
+    border-collapse: collapse;
+    font-family: 'Ubuntu', sans-serif;
+    font-size:0.65em;
+}
+
+.contactItem
+{
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    height:100%;
+    border-radius: 8px;
+    background-color: #ffffff;
+    padding: 1rem;
+    margin-bottom: 1rem;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform .2s;
+    transition: background-color .2s;
+    transition: height 1s ease;
+}
+
+.contactItem.active{
+    height:100%;
+}
+
+.contactItem:hover
+{
+    transform: scale(1.02);
+    background-color: #f8f8f8;
+}
+
+#contactInfo {
+    overflow:hidden;
+    max-width:100%;
+}
+
+#contactName
+{
+    font-size: 1em;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    white-space: normal;
+    max-width:100%;
+}
+
+#nameParts{
+    display: flex;
+    gap: 4px;
+}
+
+#contactEmail, #contactPhone
+{
+    font-size: 0.6em;
+    color: #808080;
+}
+
+#contactAddResult 
+{
+    display: inline-block;
+    font-size: 0.8em;
+    width: 90%;
+    text-align: center;
+    margin-left: 5%;
+    margin-top: 2%;
+    margin-bottom: 1%;
+    font-family: 'Ubuntu', sans-serif;
+    color: var(--text-primary);
+}
+
+.fncts{
+    display:flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: auto;
+    margin-bottom: auto;
+    align-items: center;
+}
+
+.editButton{
+    background-color: white;
+    border: none;
+    padding: 4px 6px 4px 6px;
+    border-radius: 48px;
+    cursor: pointer;
+    transition: background-color .3s;
+}
+
+.editButton:hover{
+    background-color: rgb(204, 203, 203);
+}
+
+
+.deleteButton{
+    background-color: white;
+    border: none;
+    padding: 4px 6px 4px 6px;
+    border-radius: 48px;
+    cursor: pointer;
+    transition: background-color .3s;
+}
+
+.deleteButton:hover{
+    background-color: rgb(204, 203, 203);
+}
+
+.alert-container {
+    position: fixed;
+    display: inline-block;
+    background-color: var(--card-background);
+    border-radius: 12px;
+    width: 300px;
+    min-height: 56px;
+    padding: 16px;
+    right: 2rem;
+    z-index: 1000;
+    box-shadow: 0 4px 8px var(--shadow-color);
+    border-color: var(--secondary-color);
+    border-style: solid;
+    border-width: 1px;
+}
+
+.alert {
+    background-color: #333;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+}
+
+.alert-close{
+    position: absolute;
+    top: 4px;
+    right:8px;
+    margin-left: auto;
+    background: none;
+    border: none;
+    color: var(--text-primary);
+    font-size: 20px;
+    cursor: pointer;
+}
+
+.material-symbols--add-2-rounded {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M12 21q-.425 0-.712-.288T11 20v-7H4q-.425 0-.712-.288T3 12t.288-.712T4 11h7V4q0-.425.288-.712T12 3t.713.288T13 4v7h7q.425 0 .713.288T21 12t-.288.713T20 13h-7v7q0 .425-.288.713T12 21'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.material-symbols--search-rounded {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M9.5 16q-2.725 0-4.612-1.888T3 9.5t1.888-4.612T9.5 3t4.613 1.888T16 9.5q0 1.1-.35 2.075T14.7 13.3l5.6 5.6q.275.275.275.7t-.275.7t-.7.275t-.7-.275l-5.6-5.6q-.75.6-1.725.95T9.5 16m0-2q1.875 0 3.188-1.312T14 9.5t-1.312-3.187T9.5 5T6.313 6.313T5 9.5t1.313 3.188T9.5 14'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+}
+
+.material-symbols--delete {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M7 21q-.825 0-1.412-.587T5 19V6H4V4h5V3h6v1h5v2h-1v13q0 .825-.587 1.413T17 21zm2-4h2V8H9zm4 0h2V8h-2z'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  transition: background-color .3s;
+}
+
+.material-symbols--delete:hover{
+    background-color: red;
+}
+
+.material-symbols--edit-square-rounded {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  --svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath fill='%23000' d='M10 15q-.425 0-.712-.288T9 14v-2.425q0-.4.15-.763t.425-.637l8.6-8.6q.3-.3.675-.45t.75-.15q.4 0 .763.15t.662.45L22.425 3q.275.3.425.663T23 4.4t-.137.738t-.438.662l-8.6 8.6q-.275.275-.637.438t-.763.162zm9.6-9.2l1.425-1.4l-1.4-1.4L18.2 4.4zM5 21q-.825 0-1.412-.587T3 19V5q0-.825.588-1.412T5 3h6.5q.35 0 .575.175t.35.45t.087.55t-.287.525l-4.65 4.65q-.275.275-.425.638T7 10.75V15q0 .825.588 1.412T9 17h4.225q.4 0 .763-.15t.637-.425L19.3 11.75q.25-.25.525-.288t.55.088t.45.35t.175.575V19q0 .825-.587 1.413T19 21z'/%3E%3C/svg%3E");
+  background-color: currentColor;
+  -webkit-mask-image: var(--svg);
+  mask-image: var(--svg);
+  -webkit-mask-repeat: no-repeat;
+  mask-repeat: no-repeat;
+  -webkit-mask-size: 100% 100%;
+  mask-size: 100% 100%;
+  transition: background-color .3s;
+}
+
+.material-symbols--edit-square-rounded:hover {
+    background-color: limegreen;
+}
