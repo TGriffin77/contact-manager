@@ -353,6 +353,42 @@ select
     color: var(--text-primary);
 }
 
+.fncts{
+    display:flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: auto;
+    margin-bottom: auto;
+    align-items: center;
+}
+
+.editButton{
+    background-color: white;
+    border: none;
+    padding: 4px 6px 4px 6px;
+    border-radius: 48px;
+    cursor: pointer;
+    transition: background-color .3s;
+}
+
+.editButton:hover{
+    background-color: rgb(204, 203, 203);
+}
+
+
+.deleteButton{
+    background-color: white;
+    border: none;
+    padding: 4px 6px 4px 6px;
+    border-radius: 48px;
+    cursor: pointer;
+    transition: background-color .3s;
+}
+
+.deleteButton:hover{
+    background-color: rgb(204, 203, 203);
+}
+
 .alert-container {
     position: fixed;
     display: inline-block;
@@ -432,6 +468,11 @@ select
   mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
+  transition: background-color .3s;
+}
+
+.material-symbols--delete:hover{
+    background-color: red;
 }
 
 .material-symbols--edit-square-rounded {
@@ -446,4 +487,9 @@ select
   mask-repeat: no-repeat;
   -webkit-mask-size: 100% 100%;
   mask-size: 100% 100%;
+  transition: background-color .3s;
+}
+
+.material-symbols--edit-square-rounded:hover {
+    background-color: limegreen;
 }

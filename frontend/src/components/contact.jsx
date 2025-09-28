@@ -91,15 +91,15 @@ export default function Contact({ contact, onEdit, onDelete, onAlert }) {
                 </div>
             )}
             {!isEditing &&
-                <div>
-                    <button onClick={handleEdit}>Edit</button>
-                    <button
+                <div className="fncts">
+                    <button aria-label="edit" className="editButton" onClick={handleEdit}><span className="material-symbols--edit-square-rounded"></span></button>
+                    <button aria-label="delete" className="deleteButton"
                         onClick={() => {
                             if (window.confirm(`Are you sure you want to delete ${contact.FirstName} ${contact.LastName}?`)) {
                                 onDelete(contact);
                             }
                         }}
-                    >Delete</button>
+                    ><span className="material-symbols--delete"></span></button>
                 </div>}
         </div>
     );
