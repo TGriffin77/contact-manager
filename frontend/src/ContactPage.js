@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import Alert from './components/alert';
 import Contact from './components/contact';
 
-const urlBase = 'http://localhost:8888/LAMPAPI';
+const urlBase = 'https://cop4331-contact-manager.thomasgriffin.dev/LAMPAPI';
 const extension = 'php';
 
 function Contacts() {
@@ -229,6 +229,10 @@ function Contacts() {
         localStorage.clear();
         navigate('/'); //routes to login page
     };
+
+    useEffect(() => {
+        doSearchContact();
+    }, [])
 
     return (
         <>

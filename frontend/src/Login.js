@@ -1,18 +1,13 @@
 import { useState } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 
-const urlBase = 'http://localhost:8888/LAMPAPI';
+const urlBase = 'https://cop4331-contact-manager.thomasgriffin.dev/LAMPAPI';
 const extension = 'php';
 
 function Login() {
     const [loginName, setLoginName] = useState('');
     const [loginPassword, setLoginPassword] = useState('');
     const [loginResult, setLoginResult] = useState('');
-
-    //initializing user data
-    //const [userId, setUserId] = useState(0);
-    //const [firstName, setFirstName] = useState('');
-    //const [lastName, setLastName] = useState('');
 
     // initializing nav
     const navigate = useNavigate();
@@ -46,7 +41,7 @@ function Login() {
             else {
                 localStorage.setItem('user_data', JSON.stringify(jsonObject)); //check this and whether you can still save to database
 
-                navigate('/contacts'); //still need to make contacts page
+                navigate('/contacts'); 
             }
         } catch(e) {
             setLoginResult(e.message);

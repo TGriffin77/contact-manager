@@ -1,5 +1,5 @@
 <?php
-header("Access-Control-Allow-Origin: http://localhost:3000");
+header("Access-Control-Allow-Origin: https://cop4331-contact-manager.thomasgriffin.dev");
 header("Access-Control-Allow-Headers: Content-Type");
 header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 
@@ -12,7 +12,7 @@ header("Access-Control-Allow-Methods: POST, GET, OPTIONS");
 	$email = $inData["email"];
 	$id = $inData["id"];
 
-	$conn = new mysqli("localhost", "root", "root", "COP4331");
+	$conn = new mysqli("localhost", "user", "password", "COP4331");
 	if ($conn->connect_error) 
 	{
 		returnWithError( $conn->connect_error );
