@@ -71,7 +71,7 @@ function Register() {
 
     return (
         <>
-            {registerWork && <Alert message={'Redirecting in 3 seconds'} trigger={setRegisterWork} />}
+            {registerWork && <Alert message={'Redirecting to Login in 3 seconds'} trigger={setRegisterWork} />}
             <div id="registerDiv">
                 <span id="inner-title">Register Account!</span>
                 <span id="no-account">Already have an account? <Link id="no-account-signup" to="/login">Log in</Link></span>
